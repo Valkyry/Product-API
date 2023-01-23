@@ -9,13 +9,10 @@ namespace SampleProject.Presentation.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseApiController
     {
-        private readonly IMediator _mediator;
-
-        public ProductController(IMediator mediator)
+        public ProductController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpPost("Create")]

@@ -6,13 +6,10 @@ namespace SampleProject.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticateController : BaseApiController
     {
-        private readonly IMediator _mediator;
-
-        public AuthenticateController(IMediator mediator)
+        public AuthenticateController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpPost("Login")]
