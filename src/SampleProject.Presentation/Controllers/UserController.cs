@@ -16,9 +16,9 @@ namespace SampleProject.Presentation.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult> Register(UserDTO request)
+        public async Task<ActionResult> Register(UserDTO request, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new Application.Identity.Register.Request { UserName = request.UserName, Password = request.Password }));
+            return Ok(await _mediator.Send(new Application.Identity.Register.Request { UserName = request.UserName, Password = request.Password }, cancellationToken));
         }
 
     }

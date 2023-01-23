@@ -16,9 +16,9 @@ namespace SampleProject.Presentation.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserDTO request)
+        public async Task<IActionResult> Login([FromBody] UserDTO request, CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(new Application.Identity.Authenticate.Request { UserName = request.UserName, Password = request.Password }));
+            return Ok(await _mediator.Send(new Application.Identity.Authenticate.Request { UserName = request.UserName, Password = request.Password }, cancellationToken));
         }
 
     }

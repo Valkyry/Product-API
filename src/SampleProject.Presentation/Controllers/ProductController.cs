@@ -20,11 +20,11 @@ namespace SampleProject.Presentation.Controllers
 
         [HttpPost("Create")]
         [ProducesResponseType(statusCode: StatusCodes.Status201Created)]
-        public async Task<ActionResult> Create(ProductDTO request)
+        public async Task<ActionResult> Create(ProductDTO request, CancellationToken cancellationToken = default)
         {
             try
             {
-                var result = await _mediator.Send(new Application.Products.Create.Request(request.Title, request.Type, request.Price, request.Color));
+                var result = await _mediator.Send(new Application.Products.Create.Request(request.Title, request.Type, request.Price, request.Color), cancellationToken);
                 return Ok(result);
 
             }
@@ -36,11 +36,11 @@ namespace SampleProject.Presentation.Controllers
 
         [HttpPut("Edit")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        public async Task<ActionResult> Edit(UpdateProduct request)
+        public async Task<ActionResult> Edit(UpdateProduct request, CancellationToken cancellationToken = default)
         {
             try
             {
-                var result = await _mediator.Send(new Application.Products.Update.Request(request.Id, request.Title, request.Type, request.Price, request.Color));
+                var result = await _mediator.Send(new Application.Products.Update.Request(request.Id, request.Title, request.Type, request.Price, request.Color), cancellationToken);
                 return Ok(result);
 
             }
@@ -52,11 +52,11 @@ namespace SampleProject.Presentation.Controllers
 
         [HttpDelete("Delete/{id}")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
         {
             try
             {
-                var result = await _mediator.Send(new Application.Products.Delete.Request(id));
+                var result = await _mediator.Send(new Application.Products.Delete.Request(id), cancellationToken);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -66,11 +66,11 @@ namespace SampleProject.Presentation.Controllers
         }
 
         [HttpGet("/products")]
-        public async Task<ActionResult> GetProducts(int pageSize, int pageNumber)
+        public async Task<ActionResult> GetProducts(int pageSize, int pageNumber, CancellationToken cancellationToken = default)
         {
             try
             {
-                var result = await _mediator.Send(new Application.Products.GetPagination.Request { PageSize = pageSize, PageNumber = pageNumber });
+                var result = await _mediator.Send(new Application.Products.GetPagination.Request { PageSize = pageSize, PageNumber = pageNumber }, cancellationToken);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -80,12 +80,12 @@ namespace SampleProject.Presentation.Controllers
         }
 
         [HttpGet("/products/search")]
-        public async Task<ActionResult> FindProducts(int pageSize, int pageNumber, int type, int color)
+        public async Task<ActionResult> FindProducts(int pageSize, int pageNumber, int type, int color, CancellationToken cancellationToken = default)
         {
             try
             {
 
-                var ret = await _mediator.Send(new Application.Products.SearchPagination.Request() { Type = type, Color = color, PageSize = pageSize, PageNumber = pageNumber });
+                var ret = await _mediator.Send(new Application.Products.SearchPagination.Request() { Type = type, Color = color, PageSize = pageSize, PageNumber = pageNumber }, cancellationToken);
                 return Ok(ret);
 
             }
