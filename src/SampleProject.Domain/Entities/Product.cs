@@ -6,7 +6,7 @@ namespace SampleProject.Domain.Entities
     {
         public string Title { get; set; }
         public ProductType Type { get; set; }
-        public double Price { get; set; } // decimal seems a better datatype but as u wish
+        public double Price { get; set; }
         public ProductColorType Color { get; set; }
 
     }
